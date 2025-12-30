@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
 } from 'lucide-react';
 
-// IMPORTANTE: Estas rutas ahora coinciden exactamente con tus carpetas en GitHub
+// Estas rutas ahora coinciden EXACTAMENTE con tus carpetas de GitHub
 import Dashboard from './Componentes/Dashboard';
 import Inventory from './Componentes/Inventory';
 import Sales from './Componentes/Sales';
