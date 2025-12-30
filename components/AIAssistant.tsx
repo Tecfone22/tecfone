@@ -1,6 +1,7 @@
+
 import React, { useState, useRef } from 'react';
 import { Sparkles, Send, Camera, Loader2, Bot, HelpCircle, X } from 'lucide-react';
-import { getGeminiAssistant } from '../Servicios/geminiService'; // Ruta con S mayúscula
+import { getGeminiAssistant } from '../Servicios/geminiService'; // S mayúscula para que funcione en tu GitHub
 
 const AIAssistant: React.FC = () => {
   const [prompt, setPrompt] = useState('');
