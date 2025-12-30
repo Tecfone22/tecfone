@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
 } from 'lucide-react';
-import Dashboard from './components/Dashboard';
-import Inventory from './components/Inventory';
-import Sales from './components/Sales';
-import Repairs from './components/Repairs';
-import AIAssistant from './components/AIAssistant';
-import ReceiptModal from './components/ReceiptModal';
+
+// Ajustamos las rutas para que coincidan con tus carpetas en GitHub
+import Dashboard from './Componentes/Dashboard';
+import Inventory from './Componentes/Inventory';
+import Sales from './Componentes/Sales';
+import Repairs from './Componentes/Repairs';
+import AIAssistant from './Componentes/AIAssistant';
+import ReceiptModal from './Componentes/ReceipModal'; // Según tu foto, le falta la 't' en GitHub
 import { Product, RepairOrder, Sale } from './types';
 
 const DEFAULT_CATEGORIES = ['Celulares', 'Electrónica', 'Accesorios', 'Repuestos'];
