@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
-  LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Menu, X, Smartphone 
+  LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
 } from 'lucide-react';
 import Dashboard from './components/Dashboard';
 import Inventory from './components/Inventory';
@@ -15,7 +14,6 @@ const DEFAULT_CATEGORIES = ['Celulares', 'Electrónica', 'Accesorios', 'Repuesto
 
 const App = () => {
   const [view, setView] = useState('dashboard');
-  const [menuOpen, setMenuOpen] = useState(false);
   const [activeReceipt, setActiveReceipt] = useState<Sale | null>(null);
   
   const [products, setProducts] = useState<Product[]>(() => {
@@ -63,7 +61,7 @@ const App = () => {
 
   const NavItem = ({ id, icon: Icon, label }: any) => (
     <button 
-      onClick={() => { setView(id); setMenuOpen(false); }}
+      onClick={() => setView(id)}
       className={`flex items-center gap-3 w-full p-4 rounded-2xl transition-all ${view === id ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-500 hover:bg-slate-50'}`}
     >
       <Icon size={20} /> <span className="font-bold">{label}</span>
