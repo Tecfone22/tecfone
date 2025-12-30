@@ -1,8 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
 
 export const getGeminiAssistant = async (issue: string, imageBase64?: string) => {
-  // La API_KEY se lee automáticamente de Vercel
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  // Inicialización limpia usando la variable de entorno de Vercel
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
   
   const textPart = { 
     text: `Eres el experto técnico líder de Tecfone. 
@@ -34,6 +34,6 @@ export const getGeminiAssistant = async (issue: string, imageBase64?: string) =>
     return response.text || "No se pudo generar una respuesta técnica. Intenta describir mejor la falla.";
   } catch (e: any) {
     console.error("Error Assistant:", e);
-    return "Error de conexión. Asegúrate de configurar la API_KEY en el panel de Vercel.";
+    return "Error de conexión o API KEY inválida. Por favor, revisa la configuración en Vercel.";
   }
 };
