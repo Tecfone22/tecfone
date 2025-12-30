@@ -3,13 +3,13 @@ import {
   LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
 } from 'lucide-react';
 
-// Ajustamos las rutas para que coincidan con tus carpetas en GitHub
+// IMPORTANTE: Estas rutas ahora coinciden exactamente con tus carpetas en GitHub
 import Dashboard from './Componentes/Dashboard';
 import Inventory from './Componentes/Inventory';
 import Sales from './Componentes/Sales';
 import Repairs from './Componentes/Repairs';
 import AIAssistant from './Componentes/AIAssistant';
-import ReceiptModal from './Componentes/ReceipModal'; // Según tu foto, le falta la 't' en GitHub
+import ReceiptModal from './Componentes/ReceipModal'; // Sin la 't' como está en tu foto
 import { Product, RepairOrder, Sale } from './types';
 
 const DEFAULT_CATEGORIES = ['Celulares', 'Electrónica', 'Accesorios', 'Repuestos'];
