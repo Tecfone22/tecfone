@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
 } from 'lucide-react';
 
-// RUTAS CORREGIDAS A MINÚSCULAS (Standard de Vercel)
+// Forzamos el uso de minúsculas en las rutas para compatibilidad con Vercel
 import Dashboard from './components/Dashboard';
 import Inventory from './components/Inventory';
 import Sales from './components/Sales';
