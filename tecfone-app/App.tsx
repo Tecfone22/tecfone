@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
 } from 'lucide-react';
 
-// Forzamos el uso de la carpeta 'components' en minúscula
+// Importaciones unificadas en minúsculas
 import Dashboard from './components/Dashboard';
 import Inventory from './components/Inventory';
 import Sales from './components/Sales';
@@ -72,11 +72,11 @@ const App = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] flex flex-col md:flex-row">
+    <div className="min-h-screen bg-[#f8fafc] flex flex-col md:flex-row font-sans">
       <aside className="hidden md:flex flex-col w-72 bg-white border-r p-8 sticky top-0 h-screen">
         <div className="flex items-center gap-3 mb-12">
-          <div className="bg-blue-600 p-2 rounded-xl text-white"><Smartphone size={24} /></div>
-          <h1 className="text-2xl font-black text-slate-800">TECFONE</h1>
+          <div className="bg-blue-600 p-2 rounded-xl text-white shadow-lg shadow-blue-200"><Smartphone size={24} /></div>
+          <h1 className="text-2xl font-black text-slate-800 tracking-tighter">TECFONE</h1>
         </div>
         <nav className="space-y-2 flex-1">
           <NavItem id="dashboard" icon={LayoutDashboard} label="Panel" />
@@ -87,7 +87,7 @@ const App = () => {
         </nav>
       </aside>
 
-      <main className="flex-1 p-6 md:p-12">
+      <main className="flex-1 p-4 md:p-12 overflow-x-hidden">
         {view === 'dashboard' && <Dashboard products={products} repairs={repairs} sales={sales} onPrintReceipt={setActiveReceipt} />}
         {view === 'inventory' && <Inventory products={products} setProducts={setProducts} categories={categories} setCategories={setCategories} />}
         {view === 'sales' && <Sales products={products} onSale={handleSale} />}
