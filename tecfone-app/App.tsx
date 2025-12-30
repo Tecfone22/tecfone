@@ -4,6 +4,7 @@ import {
   LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
 } from 'lucide-react';
 
+// Forzamos el uso de la carpeta 'components' en minúscula
 import Dashboard from './components/Dashboard';
 import Inventory from './components/Inventory';
 import Sales from './components/Sales';
