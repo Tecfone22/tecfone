@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Sparkles, Send, Camera, Loader2, Bot, HelpCircle, X } from 'lucide-react';
-import { getGeminiAssistant } from '../services/geminiService'; // Asegurar ruta en minúscula
+import { getGeminiAssistant } from '../services/geminiService'; 
 
 const AIAssistant: React.FC = () => {
   const [prompt, setPrompt] = useState('');
