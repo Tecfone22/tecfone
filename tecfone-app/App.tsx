@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
 } from 'lucide-react';
 
-// Importaciones unificadas en minúsculas
+// IMPORTANTE: Todas las rutas en minúsculas para evitar errores en el servidor
 import Dashboard from './components/Dashboard';
 import Inventory from './components/Inventory';
 import Sales from './components/Sales';
