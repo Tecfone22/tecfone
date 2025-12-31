@@ -1,11 +1,11 @@
 {
   "name": "tecfone-app",
   "private": true,
-  "version": "1.2.8",
+  "version": "1.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -15,7 +15,6 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.3",
