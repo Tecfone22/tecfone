@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Sparkles, Send, Camera, Loader2, Bot, HelpCircle, X } from 'lucide-react';
-import { getGeminiAssistant } from '../services/geminiService';
+import { getGeminiAssistant } from '../services/geminiService'; // Ruta corregida a minúsculas
 
 const AIAssistant: React.FC = () => {
   const [prompt, setPrompt] = useState('');
@@ -25,7 +25,7 @@ const AIAssistant: React.FC = () => {
       const responseText = await getGeminiAssistant(prompt || "Analiza esta imagen técnica", image || undefined);
       setMessages(prev => [...prev, { role: 'assistant', text: responseText }]);
     } catch (e) {
-      setMessages(prev => [...prev, { role: 'assistant', text: "Lo siento, hubo un error de conexión. Verifica tu API_KEY en Vercel." }]);
+      setMessages(prev => [...prev, { role: 'assistant', text: "Hubo un error al conectar con la IA. Asegúrate de que la API_KEY esté configurada." }]);
     } finally {
       setLoading(false);
       setImage(null);
@@ -118,11 +118,6 @@ const AIAssistant: React.FC = () => {
                 <Send size={20} />
               </button>
             </div>
-          </div>
-          <div className="flex items-center justify-center gap-4 text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">
-            <span>Powered by Gemini 3</span>
-            <span className="w-1.5 h-1.5 bg-blue-200 rounded-full"></span>
-            <span>Tecfone Intelligence Unit</span>
           </div>
         </div>
       </div>
