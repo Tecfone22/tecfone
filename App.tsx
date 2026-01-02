@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
-} from 'lucide-react';
+} from 'lucide-center';
 
 import Dashboard from './components/Dashboard';
 import Inventory from './components/Inventory';
