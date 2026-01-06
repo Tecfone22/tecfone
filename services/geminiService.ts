@@ -1,41 +1,40 @@
 import { GoogleGenAI } from "@google/genai";
 
 export const getGeminiAssistant = async (issue: string, imageBase64?: string) => {
+  // En Vite/Vercel, usamos process.env.API_KEY si está definido en el config
   const apiKey = process.env.API_KEY;
+  
   if (!apiKey) {
-    return "Error: Configura la API_KEY en las variables de entorno de Vercel.";
+    return "⚠️ Error: No se detectó la API_KEY. Asegúrate de configurarla en Vercel (Settings > Environment Variables) y hacer un 'Redeploy'.";
   }
 
-  // Inicialización correcta según estándares
   const ai = new GoogleGenAI({ apiKey });
   
-  const textPart = { 
-    text: `Eres el experto técnico líder de Tecfone. 
-    Tu objetivo es ayudar en el taller de reparaciones.
-    Consulta técnica: "${issue}". 
-    Instrucciones: Proporciona pasos detallados de microsoldadura o diagnóstico de software según corresponda. Sé breve pero muy técnico.`
-  };
-
-  const parts: any[] = [textPart];
-
-  if (imageBase64) {
-    parts.push({
-      inlineData: {
-        mimeType: "image/jpeg",
-        data: imageBase64.includes(',') ? imageBase64.split(',')[1] : imageBase64
-      }
-    });
-  }
-
   try {
+    const parts: any[] = [
+      { text: `Eres el soporte técnico experto de Tecfone. 
+               Resuelve esta duda técnica: "${issue}". 
+               Da pasos claros, herramientas necesarias y precauciones. 
+               Si hay una imagen, analízala buscando daños físicos o componentes quemados.` }
+    ];
+
+    if (imageBase64) {
+      parts.push({
+        inlineData: {
+          mimeType: "image/jpeg",
+          data: imageBase64.includes(',') ? imageBase64.split(',')[1] : imageBase64
+        }
+      });
+    }
+
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: [{ parts }]
     });
     
-    return response.text || "No pude generar una respuesta técnica en este momento.";
+    return response.text || "La IA no pudo procesar la respuesta.";
   } catch (e: any) {
-    console.error("Error en Gemini API:", e);
-    return "Error de comunicación con el asistente IA. Revisa tu cuota de API.";
+    console.error("Gemini Error:", e);
+    return "Lo siento, hubo un error conectando con la IA. Verifica tu conexión o los límites de la API.";
   }
 };
