@@ -75,7 +75,6 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-[#f8fafc] flex flex-col md:flex-row font-sans overflow-x-hidden">
-      {/* Botón de Menú Móvil */}
       <div className="md:hidden bg-white p-4 border-b flex justify-between items-center sticky top-0 z-50">
         <div className="flex items-center gap-2">
           <div className="bg-blue-600 p-1.5 rounded-lg text-white"><Smartphone size={20} /></div>
@@ -86,7 +85,6 @@ const App = () => {
         </button>
       </div>
 
-      {/* Sidebar (Desktop y Móvil) */}
       <aside className={`
         fixed inset-0 z-40 bg-white transition-transform transform md:translate-x-0 md:static md:block md:w-72 md:border-r md:h-screen p-8
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
