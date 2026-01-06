@@ -7,7 +7,7 @@ const AIAssistant: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<string | null>(null);
   const [messages, setMessages] = useState<{role: 'user' | 'assistant', text: string, image?: string}[]>([
-    { role: 'assistant', text: '¡Hola! Soy el asistente IA de Tecfone. Puedo ayudarte con protocolos de diagnóstico o microelectrónica. ¿Qué equipo estamos revisando?' }
+    { role: 'assistant', text: '¡Hola! Soy el asistente IA de Tecfone. Puedo ayudarte con protocolos de diagnóstico o microelectrónica. ¿Qué equipo estamos revisando hoy?' }
   ]);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -24,7 +24,7 @@ const AIAssistant: React.FC = () => {
       const responseText = await getGeminiAssistant(prompt || "Analiza esta imagen para diagnóstico técnico", image || undefined);
       setMessages(prev => [...prev, { role: 'assistant', text: responseText }]);
     } catch (e) {
-      setMessages(prev => [...prev, { role: 'assistant', text: "Lo siento, hubo un error al procesar tu consulta técnica." }]);
+      setMessages(prev => [...prev, { role: 'assistant', text: "Hubo un error al conectar con el servidor de IA." }]);
     } finally {
       setLoading(false);
       setImage(null);
@@ -49,7 +49,7 @@ const AIAssistant: React.FC = () => {
           <Sparkles className="text-blue-600" />
           Asistente IA Tecfone
         </h2>
-        <p className="text-slate-500">Soporte técnico avanzado</p>
+        <p className="text-slate-500">Soporte técnico avanzado con Gemini 3</p>
       </div>
 
       <div className="flex-1 bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
@@ -65,7 +65,7 @@ const AIAssistant: React.FC = () => {
                 <div className={`rounded-2xl p-4 shadow-sm ${
                   msg.role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-slate-50 text-slate-700 rounded-tl-none border border-slate-100'
                 }`}>
-                  {msg.image && <img src={msg.image} className="max-w-xs rounded-lg mb-3" alt="Preview" />}
+                  {msg.image && <img src={msg.image} className="max-w-xs rounded-lg mb-3 shadow-md" alt="Preview" />}
                   <p className="whitespace-pre-wrap text-sm leading-relaxed">{msg.text}</p>
                 </div>
               </div>
@@ -74,7 +74,7 @@ const AIAssistant: React.FC = () => {
           {loading && (
             <div className="flex items-center gap-2 text-slate-400 p-4">
               <Loader2 className="animate-spin" size={18} />
-              <span className="text-xs font-bold uppercase tracking-widest">Consultando base de datos técnica...</span>
+              <span className="text-xs font-bold uppercase tracking-widest">Analizando componentes técnicos...</span>
             </div>
           )}
         </div>
@@ -83,21 +83,21 @@ const AIAssistant: React.FC = () => {
           {image && (
             <div className="relative inline-block">
               <img src={image} className="h-20 w-20 object-cover rounded-xl border-2 border-white shadow-sm" alt="Preview" />
-              <button onClick={() => setImage(null)} className="absolute -top-2 -right-2 bg-rose-500 text-white rounded-full p-1"><X size={12} /></button>
+              <button onClick={() => setImage(null)} className="absolute -top-2 -right-2 bg-rose-500 text-white rounded-full p-1 shadow-md hover:bg-rose-600"><X size={12} /></button>
             </div>
           )}
           <div className="flex items-center gap-2">
-            <button onClick={() => fileInputRef.current?.click()} className="p-3 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-blue-600 transition-colors"><Camera size={20} /></button>
+            <button onClick={() => fileInputRef.current?.click()} className="p-3 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-blue-600 transition-all active:scale-95"><Camera size={20} /></button>
             <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleFileChange} />
             <input 
               type="text" 
-              placeholder="Escribe tu consulta técnica..." 
-              className="flex-1 p-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Consulta técnica o diagnóstico..." 
+              className="flex-1 p-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 shadow-inner bg-white"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             />
-            <button onClick={handleSend} disabled={loading || (!prompt && !image)} className="p-3 bg-blue-600 text-white rounded-xl disabled:bg-slate-300 hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200"><Send size={20} /></button>
+            <button onClick={handleSend} disabled={loading || (!prompt && !image)} className="p-3 bg-blue-600 text-white rounded-xl disabled:bg-slate-300 hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 active:scale-95"><Send size={20} /></button>
           </div>
         </div>
       </div>
