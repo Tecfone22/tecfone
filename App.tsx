@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone 
+  LayoutDashboard, Package, ShoppingCart, Wrench, Sparkles, Smartphone, Menu, X
 } from 'lucide-react';
 
 import Dashboard from './components/Dashboard';
@@ -16,6 +16,7 @@ const DEFAULT_CATEGORIES = ['Celulares', 'Electrónica', 'Accesorios', 'Repuesto
 const App = () => {
   const [view, setView] = useState('dashboard');
   const [activeReceipt, setActiveReceipt] = useState<Sale | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const [products, setProducts] = useState<Product[]>(() => {
     const saved = localStorage.getItem('tecfone_products');
@@ -62,7 +63,10 @@ const App = () => {
 
   const NavItem = ({ id, icon: Icon, label }: any) => (
     <button 
-      onClick={() => setView(id)}
+      onClick={() => {
+        setView(id);
+        setIsMobileMenuOpen(false);
+      }}
       className={`flex items-center gap-3 w-full p-4 rounded-2xl transition-all ${view === id ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-500 hover:bg-slate-50'}`}
     >
       <Icon size={20} /> <span className="font-bold">{label}</span>
@@ -70,13 +74,28 @@ const App = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] flex flex-col md:flex-row font-sans">
-      <aside className="hidden md:flex flex-col w-72 bg-white border-r p-8 sticky top-0 h-screen">
-        <div className="flex items-center gap-3 mb-12">
+    <div className="min-h-screen bg-[#f8fafc] flex flex-col md:flex-row font-sans overflow-x-hidden">
+      {/* Botón de Menú Móvil */}
+      <div className="md:hidden bg-white p-4 border-b flex justify-between items-center sticky top-0 z-50">
+        <div className="flex items-center gap-2">
+          <div className="bg-blue-600 p-1.5 rounded-lg text-white"><Smartphone size={20} /></div>
+          <h1 className="text-xl font-black text-slate-800 tracking-tighter">TECFONE</h1>
+        </div>
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-slate-600">
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Sidebar (Desktop y Móvil) */}
+      <aside className={`
+        fixed inset-0 z-40 bg-white transition-transform transform md:translate-x-0 md:static md:block md:w-72 md:border-r md:h-screen p-8
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <div className="hidden md:flex items-center gap-3 mb-12">
           <div className="bg-blue-600 p-2 rounded-xl text-white shadow-lg shadow-blue-200"><Smartphone size={24} /></div>
           <h1 className="text-2xl font-black text-slate-800 tracking-tighter">TECFONE</h1>
         </div>
-        <nav className="space-y-2 flex-1">
+        <nav className="space-y-2 flex-1 mt-16 md:mt-0">
           <NavItem id="dashboard" icon={LayoutDashboard} label="Panel" />
           <NavItem id="inventory" icon={Package} label="Inventario" />
           <NavItem id="sales" icon={ShoppingCart} label="Ventas" />
@@ -85,7 +104,7 @@ const App = () => {
         </nav>
       </aside>
 
-      <main className="flex-1 p-4 md:p-12 overflow-x-hidden">
+      <main className="flex-1 p-4 md:p-12 pb-24 md:pb-12">
         {view === 'dashboard' && <Dashboard products={products} repairs={repairs} sales={sales} onPrintReceipt={setActiveReceipt} />}
         {view === 'inventory' && <Inventory products={products} setProducts={setProducts} categories={categories} setCategories={setCategories} />}
         {view === 'sales' && <Sales products={products} onSale={handleSale} />}
